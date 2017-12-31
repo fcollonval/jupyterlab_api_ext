@@ -69,7 +69,7 @@ function activateHelloWorldExtension(app: JupyterLab, palette: ICommandPalette, 
     label: 'Post and reply',
     caption: 'Send a POST request to the Python server extension with some data and get a feedback.',
     execute: () => {
-      console.log('Emit POST requeste exchanging data in JSON format.');
+      console.log('Emit POST request exchanging data in JSON format.');
 
       // Generate Dialog body
       let bodyDialog = document.createElement('div');
