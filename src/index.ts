@@ -1,9 +1,9 @@
 import { 
-  Menu
+  Menu, Widget
 } from "@phosphor/widgets";
 
 import { 
-  ICommandPalette
+  Dialog, ICommandPalette, showDialog
  } from "@jupyterlab/apputils";
 
 import {
@@ -13,6 +13,10 @@ import {
 import {
   IMainMenu
 } from '@jupyterlab/mainmenu';
+
+import { 
+  HelloWorld
+} from "./helloworld";
 
 import '../style/index.css';
 
@@ -41,11 +45,14 @@ function activateHelloWorldExtension(app: JupyterLab, palette: ICommandPalette, 
   const category = 'Hello World';
   const { commands } = app;
 
+  let helloWorld = new HelloWorld();
+
   commands.addCommand(CommandIDs.get, {
     label: 'Get',
     caption: 'Send a GET request to the Python server extension',
     execute: () => {
       console.log('Emit GET request.');
+      helloWorld.get();
     }
   });
 
@@ -54,6 +61,7 @@ function activateHelloWorldExtension(app: JupyterLab, palette: ICommandPalette, 
     caption: 'Send a POST request to the Python server extension',
     execute: () => {
       console.log('Emit POST request.');
+      helloWorld.post();
     }
   });
 
@@ -62,6 +70,33 @@ function activateHelloWorldExtension(app: JupyterLab, palette: ICommandPalette, 
     caption: 'Send a POST request to the Python server extension with some data and get a feedback.',
     execute: () => {
       console.log('Emit POST requeste exchanging data in JSON format.');
+
+      // Generate Dialog body
+      let bodyDialog = document.createElement('div');
+      let nameLabel = document.createElement('label');
+      nameLabel.textContent = "Name: "
+      let nameInput = document.createElement('input');
+      nameInput.className = "jp-mod-styled";
+      bodyDialog.appendChild(nameLabel);
+      bodyDialog.appendChild(nameInput);
+
+      showDialog({
+        title: "What's your name",
+        body: new Widget({node: bodyDialog}),
+        buttons: [Dialog.cancelButton(), Dialog.okButton()]
+      }).then(result => {
+        if (result.button.accept){
+          let name = nameInput.value;
+          helloWorld.postReply(name).then(response => {
+            showDialog({
+              title: "Greetings",
+              body: response.greetings,
+              buttons: [Dialog.okButton()]
+            });
+          });
+        }
+      });
+
     }
   });
 
