@@ -1,0 +1,43 @@
+{
+  "name": "jupyterlab_api_ext",
+  "version": "0.1.0",
+  "description": "A 'Hello World' example of Jupyterlab extension using a notebook server extension.",
+  "keywords": [
+    "extension",
+    "jupyter",
+    "jupyterlab"
+  ],
+  "homepage": "https://github.com/fcollonval/jupyterlab_api_ext",
+  "bugs": {
+    "url": "https://github.com/fcollonval/jupyterlab_api_ext/issues"
+  },
+  "license": "BSD-3-Clause",
+  "author": "Frederic Collonval",
+  "files": [
+    "lib/**/*.{d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}",
+    "style/**/*.{css,eot,gif,html,jpg,json,png,svg,woff2,ttf}"
+  ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fcollonval/jupyterlab_api_ext.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf lib",
+    "prepare": "npm run build",
+    "watch": "tsc -w"
+  },
+  "dependencies": {
+    "@jupyterlab/application": "^0.13.0",
+    "@jupyterlab/mainmenu": "^0.2.0"
+  },
+  "devDependencies": {
+    "rimraf": "^2.6.1",
+    "typescript": "~2.6.0"
+  },
+  "jupyterlab": {
+    "extension": true
+  }
+}
