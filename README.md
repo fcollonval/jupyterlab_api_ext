@@ -1,4 +1,7 @@
+**DEPRECATED** :arrow_right: Have a look at the [official server extension example](https://github.com/jupyterlab/extension-examples) instead.
+
 # jupyterlab_api_ext
+
 The goal is to provide an "Hello world" example of complex extension for JupyterLab using a notebook server extension.
 
 ![demo](demo_extension.gif)
